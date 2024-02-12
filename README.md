@@ -1,6 +1,7 @@
 # flutter_practice
 
-A new Flutter project.
+This lesson covers sliders and indicators.
+https://www.udemy.com/course/flutter-intermediate/learn/lecture/10232400#content
 
 ## Getting Started
 

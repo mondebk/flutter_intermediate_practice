@@ -34,6 +34,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  double sliderValue = 0.0;
+
+  void onChange(double value) => setState(() {
+    sliderValue = value;
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +47,31 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-             Text('Add widgets here'),
+             Slider(value: sliderValue, onChanged: onChange,),
+            Container(
+              padding: const EdgeInsets.all(32.0),
+              child: LinearProgressIndicator(
+                value: sliderValue,
+                //The value colour requires an animation, so you cant just say Colors.color.
+                // Note: if you don't supply a color, it will always default to blue.
+                valueColor: const AlwaysStoppedAnimation<Color>(
+                  Colors.green
+                ),
+              )
+            ),
+            Container(
+                padding: const EdgeInsets.all(32.0),
+                child: CircularProgressIndicator(
+                  value: sliderValue,
+                  valueColor: const AlwaysStoppedAnimation<Color>(
+                      Colors.purple
+                  ),
+                )
+            )
           ]
         ),
       ),
