@@ -44,10 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int counter = 0;
 
-  ///List<Widget> = new List<Widget>() is no longer supported as of Dart3
-  ///The method below is required in order to initialise a dynamically sized list.
-  ///
-  final List<Widget> _list = <Widget>[];
+  /// List<Widget> = new List<Widget>() is no longer supported as of Dart3
+  ///   The method below is required in order to initialise a dynamically sized list.
+   List<Widget> _list = <Widget>[];
 
   void _onClicked() {
     Widget child = _newItem(counter);
@@ -67,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
           avatar: CircleAvatar(
               backgroundColor: Colors.grey.shade800, child: Text(i.toString())),
         ));
+    counter++;
     return child;
   }
 
@@ -89,14 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () => _onClicked(), child: const Icon(Icons.add)),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-          ],
+          children: _list
         ),
       ),
     );
