@@ -32,22 +32,59 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+enum Animals { cat, dog, bird, lizard, fish }
+
 class _MyHomePageState extends State<MyHomePage> {
+  Animals selectedAnimal = Animals.cat;
+  String value = "Make a selection";
+  List<PopupMenuEntry<Animals>> animalItems = <PopupMenuEntry<Animals>>[];
+
+  @override
+  void initState() {
+    super.initState();
+    for (Animals animal in Animals.values) {
+      animalItems.add(PopupMenuItem(
+          value: animal, child: Text(getDisplay(animal))));
+    }
+  }
+
+  void onSelected(Animals animal) {
+    setState(() {
+      selectedAnimal = animal;
+      value = "You selected ${getDisplay(animal)}";
+    });
+  }
+
+  String getDisplay(Animals animal) {
+    //this ensures that it returns cat instead of animal.cat
+    int index = animal.toString().indexOf('.');
+    index++;
+    return animal.toString().substring(index); // return everything after period
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme
+            .of(context)
+            .colorScheme
+            .inversePrimary,
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-             Text('Add widgets here'),
-          ]
-        ),
+      body: Center(
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(padding: const EdgeInsets.all(5.0), child: Text(value)),
+              PopupMenuButton(
+                initialValue: Animals.cat,
+                onSelected: onSelected,
+                itemBuilder: (BuildContext context) {
+                  return animalItems;
+                },
+                child: const Icon(Icons.input),)
+            ]),
       ),
     );
   }

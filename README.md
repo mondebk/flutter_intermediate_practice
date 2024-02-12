@@ -1,6 +1,7 @@
 # flutter_practice
 
-A new Flutter project.
+Popup menu button tutorial (a button that shows a menu when you click on it)
+https://www.udemy.com/course/flutter-intermediate/learn/lecture/10232410#content
 
 ## Getting Started
 
